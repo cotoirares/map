@@ -1,15 +1,31 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import Controller.Service;
+import Model.Expression.VariableExpression;
+import Model.ProgState;
+import Model.Statement.*;
+import Model.Type.IntType;
+import Model.Value.IntValue;
+import Model.Value.Value;
+import Repository.IRepository;
+import Repository.Repository;
+import Utils.*;
+import Model.Expression.ValueExpression;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        // int v;
+        // print(v);
+        IStatement ex1= new CompStatement(new VarDeclStatement("v", new IntType()), new CompStatement(new AssignStatement("v", new ValueExpression(new IntValue(2))),
+                new PrintStatement(new VariableExpression("v"))));
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        MyIStack<IStatement> stack = new MyStack<>();
+        MyIDictionary<String, Value> symT = new MyDictionary<>();
+        MyIList<Value> out = new MyList<>();
+
+        ProgState progState = new ProgState(stack, symT, out, ex1);
+
+        IRepository repo = new Repository();
+        repo.add(progState);
+        Service serv = new Service(repo);
+        serv.allStep();
     }
 }
