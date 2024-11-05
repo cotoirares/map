@@ -10,7 +10,7 @@ public class IntValue implements Value {
         value = v;
     }
 
-    int getVal() {
+    public int getVal() {
         return value;
     }
 

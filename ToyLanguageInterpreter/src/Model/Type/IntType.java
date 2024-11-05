@@ -1,7 +1,7 @@
 package Model.Type;
 
 public class IntType implements Type {
-    String type = "Int";
+    String type = "int";
 
     @Override
     public boolean equals(Object another){

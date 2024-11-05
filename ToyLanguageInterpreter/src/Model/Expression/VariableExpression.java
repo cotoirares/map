@@ -13,7 +13,15 @@ public class VariableExpression implements Expression {
 
     @Override
     public Value evaluate(MyIDictionary<String, Value> SymbolTable) throws MyException {
-        return SymbolTable.lookUp(variable);
+        if (SymbolTable.isDefined(this.variable)){
+            try{
+                return SymbolTable.lookUp(variable);
+            }
+            catch (MyException e){
+                throw new MyException(e.getMessage());
+            }
+        }
+        else throw new MyException("Variable not declared");
     }
 
     @Override

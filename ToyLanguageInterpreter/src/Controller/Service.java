@@ -5,6 +5,8 @@ import Utils.MyIStack;
 import Model.Statement.IStatement;
 import Repository.IRepository;
 
+import java.util.EmptyStackException;
+
 public class Service {
     private IRepository repository;
 
@@ -14,10 +16,14 @@ public class Service {
 
     private ProgState oneStep(ProgState state) throws MyException {
         MyIStack<IStatement> execStack = state.getExecStack();
-        if(execStack.isEmpty())
+        if (execStack.isEmpty())
             throw new MyException("ProgState Stack is empty!");
-
-        IStatement currentStatement = execStack.pop();
+        IStatement currentStatement;
+        try {
+            currentStatement = execStack.pop();
+        } catch (EmptyStackException e) {
+            throw new MyException(e.getMessage());
+        }
         return currentStatement.execute(state);
     }
 

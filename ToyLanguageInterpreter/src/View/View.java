@@ -1,25 +1,23 @@
 package View;
 
-import Model.Expression.VariableExpression;
-import Model.Statement.VarDeclStatement;
-import Model.Type.IntType;
-import Utils.*;
 import Controller.Service;
+import Model.Expression.VariableExpression;
 import Model.ProgState;
-import Model.Statement.CompStatement;
-import Model.Statement.IStatement;
-import Model.Statement.PrintStatement;
+import Model.Statement.*;
+import Model.Type.IntType;
+import Model.Value.IntValue;
 import Model.Value.Value;
 import Repository.IRepository;
 import Repository.Repository;
+import Utils.*;
+import Model.Expression.ValueExpression;
 
 public class View {
     public static void main(String[] args) {
-
         // int v;
         // print(v);
-        IStatement ex1= new CompStatement(new VarDeclStatement("v", new IntType()),
-                new PrintStatement(new VariableExpression("v")));
+        IStatement ex1= new CompStatement(new VarDeclStatement("v", new IntType()), new CompStatement(new AssignStatement("v", new ValueExpression(new IntValue(2))),
+                new PrintStatement(new VariableExpression("v"))));
 
         MyIStack<IStatement> stack = new MyStack<>();
         MyIDictionary<String, Value> symT = new MyDictionary<>();
