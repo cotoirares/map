@@ -1,14 +1,16 @@
 package Model.Statement;
 
-import Controller.MyException;
+import Exceptions.MyException;
 import Model.ProgState;
 import Model.Type.IntType;
 import Model.Type.Type;
 import Model.Value.IntValue;
+import Model.Value.Value;
+import Utils.MyIDictionary;
 
 public class VarDeclStatement implements IStatement {
     private String id;
-    Type type;
+    private Type type;
 
     public VarDeclStatement(String id, Type type) {
         this.id = id;
@@ -17,7 +19,10 @@ public class VarDeclStatement implements IStatement {
 
     @Override
     public ProgState execute(ProgState state) throws MyException {
-        state.getSymbolTable().put(id, new IntValue(0));
+        MyIDictionary<String, Value> symbolTable = state.getSymbolTable();
+        if (symbolTable.isDefined(id))
+            throw new MyException("Variable " + id + " is already defined!");
+        symbolTable.put(id, type.defaultValue());
         return state;
     }
 

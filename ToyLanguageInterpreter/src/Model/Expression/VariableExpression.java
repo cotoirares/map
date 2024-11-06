@@ -1,10 +1,10 @@
 package Model.Expression;
 
-import Controller.MyException;
+import Exceptions.MyException;
 import Model.Value.Value;
 import Utils.MyIDictionary;
 
-public class VariableExpression implements Expression {
+public class VariableExpression implements IExpression {
     private String variable;
 
     public VariableExpression(String variable) {
@@ -25,7 +25,7 @@ public class VariableExpression implements Expression {
     }
 
     @Override
-    public Expression deepCopy() {
+    public IExpression deepCopy() {
         return new VariableExpression(variable);
     }
 

@@ -1,7 +1,7 @@
 package Model.Statement;
 
 import Utils.MyIStack;
-import Controller.MyException;
+import Exceptions.MyException;
 import Model.ProgState;
 
 public class CompStatement implements Model.Statement.IStatement {

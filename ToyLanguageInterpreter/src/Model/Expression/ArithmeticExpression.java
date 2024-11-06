@@ -1,16 +1,17 @@
 package Model.Expression;
 
-import Controller.MyException;
+import Exceptions.MyException;
+import Model.Type.IntType;
 import Model.Value.IntValue;
 import Model.Value.Value;
 import Utils.MyIDictionary;
 
-public class ArithmeticExpression implements Expression{
-    private Expression exp1;
-    private Expression exp2;
+public class ArithmeticExpression implements IExpression {
+    private IExpression exp1;
+    private IExpression exp2;
     private String operation;
 
-    public ArithmeticExpression(Expression exp1, Expression exp2, String operation){
+    public ArithmeticExpression(String operation, IExpression exp1, IExpression exp2) {
         this.exp1 = exp1;
         this.exp2 = exp2;
         this.operation = operation;
@@ -21,8 +22,8 @@ public class ArithmeticExpression implements Expression{
         Value v1, v2;
         v1 = exp1.evaluate(SymbolTable);
         v2 = exp2.evaluate(SymbolTable);
-        if (v1.getType().equals(("Int"))) {
-            if (v2.getType().equals("Int")) {
+        if (v1.getType().equals(new IntType())) {
+            if (v2.getType().equals(new IntType())) {
                 IntValue i1 = (IntValue) v1;
                 IntValue i2 = (IntValue) v2;
                 int val1, val2;
@@ -43,11 +44,11 @@ public class ArithmeticExpression implements Expression{
     }
 
     @Override
-    public Expression deepCopy(){
-        return new ArithmeticExpression(exp1.deepCopy(), exp2.deepCopy(), operation);
+    public IExpression deepCopy(){
+        return new ArithmeticExpression (operation, exp1.deepCopy(), exp2.deepCopy());
     }
 
     public String toString(){
-        return "(" + exp1 + operation + exp2 + ")";
+        return exp1.toString() + " " + operation + " " + exp2.toString();
     }
 }

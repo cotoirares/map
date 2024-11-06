@@ -1,10 +1,10 @@
 package Model.Expression;
 
-import Controller.MyException;
+import Exceptions.MyException;
 import Model.Value.Value;
 import Utils.MyIDictionary;
 
-public interface Expression {
+public interface IExpression {
     Value evaluate(MyIDictionary<String,Value> SymbolTable) throws MyException;
-    Expression deepCopy();
+    IExpression deepCopy();
 }

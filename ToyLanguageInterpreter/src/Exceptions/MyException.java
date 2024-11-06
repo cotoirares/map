@@ -1,4 +1,4 @@
-package Controller;
+package Exceptions;
 
 public class MyException extends RuntimeException {
     public MyException(String message) {

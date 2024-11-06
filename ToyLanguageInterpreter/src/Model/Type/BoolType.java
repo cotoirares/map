@@ -24,6 +24,7 @@ public class BoolType implements Type{
         return new BoolType();
     }
 
+    @Override
     public Value defaultValue() {
         return new BoolValue(false);
     }

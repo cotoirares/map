@@ -1,13 +1,13 @@
 package Model.Statement;
 
-import Controller.MyException;
-import Model.Expression.Expression;
+import Exceptions.MyException;
+import Model.Expression.IExpression;
 import Model.ProgState;
 
 public class PrintStatement implements IStatement {
-    private Expression expression;
+    private IExpression expression;
 
-    public PrintStatement(Expression expression) {
+    public PrintStatement(IExpression expression) {
         this.expression = expression;
     }
 

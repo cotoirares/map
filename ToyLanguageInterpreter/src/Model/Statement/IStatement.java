@@ -1,6 +1,6 @@
 package Model.Statement;
 
-import Controller.MyException;
+import Exceptions.MyException;
 import Model.ProgState;
 
 public interface IStatement {

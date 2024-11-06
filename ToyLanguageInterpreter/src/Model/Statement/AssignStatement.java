@@ -1,20 +1,19 @@
 package Model.Statement;
 
-import Controller.MyException;
+import Exceptions.MyException;
 import Model.ProgState;
 import Model.Type.Type;
 import Model.Value.Value;
 import Utils.MyIDictionary;
 import Utils.MyIStack;
-import Utils.MyStack;
 
-import Model.Expression.Expression;
+import Model.Expression.IExpression;
 
 public class AssignStatement implements IStatement {
     private String id;
-    Expression expression;
+    IExpression expression;
 
-    public AssignStatement(String id, Expression expression) {
+    public AssignStatement(String id, IExpression expression) {
         this.id = id;
         this.expression = expression;
     }
