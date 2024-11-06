@@ -1,6 +1,7 @@
 package Model.Statement;
 
 import Exceptions.MyException;
+import Exceptions.StatementException;
 import Model.Expression.IExpression;
 import Model.ProgState;
 import Model.Type.BoolType;
@@ -41,7 +42,7 @@ public class IfStatement implements  IStatement{
             }
         }
         else{
-            throw new MyException("The condition in the if statement is not a boolean");
+            throw new StatementException("The condition in the if statement is not a boolean");
         }
         return state;
     }

@@ -1,5 +1,7 @@
 package Model.Expression;
 
+import Exceptions.ExpressionException;
+import Exceptions.InterpreterException;
 import Exceptions.MyException;
 import Model.Type.BoolType;
 import Model.Value.BoolValue;
@@ -40,11 +42,11 @@ public class LogicExpression implements IExpression {
                 b2 = Boolean.parseBoolean(val2.toString());
                 if (operation.equals("and")) return new BoolValue(b1 && b2);
                 else if (operation.equals("or")) return new BoolValue(b1 || b2);
-                else throw new MyException("invalid operation");
+                else throw new ExpressionException("invalid operation");
             }
-            else throw new MyException("Operand 2 is not boolean");
+            else throw new InterpreterException("Operand 2 is not boolean");
         }
-        else throw new MyException("Operand 1 is not boolean");
+        else throw new InterpreterException("Operand 1 is not boolean");
     }
 
     @Override

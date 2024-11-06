@@ -1,5 +1,6 @@
 package Model.Expression;
 
+import Exceptions.ExpressionException;
 import Exceptions.MyException;
 import Model.Value.Value;
 import Utils.MyIDictionary;
@@ -21,7 +22,7 @@ public class VariableExpression implements IExpression {
                 throw new MyException(e.getMessage());
             }
         }
-        else throw new MyException("Variable not declared");
+        else throw new ExpressionException("Variable not declared");
     }
 
     @Override

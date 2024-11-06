@@ -1,6 +1,8 @@
 package Model.Statement;
 
+import Exceptions.InterpreterException;
 import Exceptions.MyException;
+import Exceptions.StatementException;
 import Model.ProgState;
 import Model.Type.Type;
 import Model.Value.Value;
@@ -28,8 +30,8 @@ public class AssignStatement implements IStatement {
             if ((val.getType()).equals(typeId)) {
                 SymbolTable.update(id, val);
             } else
-                throw new MyException("declared type of variable " + id + " and type of the assigned expression do not match.");
-        } else throw new MyException("the used variable " + id + " was not declared before");
+                throw new InterpreterException("declared type of variable " + id + " and type of the assigned expression do not match.");
+        } else throw new StatementException("the used variable " + id + " was not declared before");
 
         return state;
     }

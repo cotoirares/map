@@ -1,6 +1,7 @@
 package Controller;
 
 import Exceptions.MyException;
+import Exceptions.StackException;
 import Model.ProgState;
 import Utils.MyIStack;
 import Model.Statement.IStatement;
@@ -18,7 +19,7 @@ public class Service {
     private ProgState oneStep(ProgState state) throws MyException {
         MyIStack<IStatement> execStack = state.getExecStack();
         if (execStack.isEmpty())
-            throw new MyException("ProgState Stack is empty!");
+            throw new StackException("ProgState Stack is empty!");
         IStatement currentStatement;
         try {
             currentStatement = execStack.pop();

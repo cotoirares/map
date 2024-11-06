@@ -1,5 +1,6 @@
 package Model.Statement;
 
+import Exceptions.InterpreterException;
 import Exceptions.MyException;
 import Model.ProgState;
 import Model.Type.IntType;
@@ -21,7 +22,7 @@ public class VarDeclStatement implements IStatement {
     public ProgState execute(ProgState state) throws MyException {
         MyIDictionary<String, Value> symbolTable = state.getSymbolTable();
         if (symbolTable.isDefined(id))
-            throw new MyException("Variable " + id + " is already defined!");
+            throw new InterpreterException("Variable " + id + " is already defined!");
         symbolTable.put(id, type.defaultValue());
         return state;
     }

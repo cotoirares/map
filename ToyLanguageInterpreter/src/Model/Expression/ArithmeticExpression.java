@@ -1,5 +1,8 @@
 package Model.Expression;
 
+import Exceptions.DivisionException;
+import Exceptions.ExpressionException;
+import Exceptions.InterpreterException;
 import Exceptions.MyException;
 import Model.Type.IntType;
 import Model.Value.IntValue;
@@ -33,13 +36,13 @@ public class ArithmeticExpression implements IExpression {
                 if (operation.equals("-")) return new IntValue(val1 - val2);
                 if (operation.equals("*")) return new IntValue(val1 * val2);
                 if (operation.equals("/")) {
-                    if (val2 == 0) throw new MyException("division by zero");
+                    if (val2 == 0) throw new DivisionException("division by zero");
                     return new IntValue(val1 / val2);
                 }
-                throw new MyException("invalid operation");
-            } else throw new MyException("the operands are not integers");
+                throw new ExpressionException("invalid operation");
+            } else throw new InterpreterException("the operands are not integers");
         } else {
-            throw new MyException("the operands are not integers");
+            throw new InterpreterException("the operands are not integers");
         }
     }
 
