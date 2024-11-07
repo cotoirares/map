@@ -57,6 +57,15 @@ public class View {
                 );
         return ex3;
     }
+
+    public static IStatement example4(){
+        // int a; bool b; a = b; expected: type error
+        IStatement ex4 = new CompStatement(
+                new VarDeclStatement("a", new IntType()),
+                new AssignStatement("a", new ValueExpression(new BoolValue(true)))
+        );
+        return ex4;
+    }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         IStatement selectedProgram = null;
@@ -65,7 +74,8 @@ public class View {
             System.out.println("1. int v; v=2; Print(v)");
             System.out.println("2. int a; int b; a=2+3*5; b=a+1; Print(b)");
             System.out.println("3. bool a; int v; a=true; (If a Then v=2 Else v=3); Print(v)");
-            System.out.println("\nSelect the program to execute: (1-3)");
+            System.out.println("4. int a; bool b; a = b; expected: type error");
+            System.out.println("\nSelect the program to execute: ");
 
             try {
                 int choice = scanner.nextInt();
@@ -78,6 +88,9 @@ public class View {
                         break;
                     case 3:
                         selectedProgram = example3();
+                        break;
+                    case 4:
+                        selectedProgram = example4();
                         break;
                     default:
                         System.out.println("Invalid choice!");
