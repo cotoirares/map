@@ -105,8 +105,7 @@ public class View {
         MyIList<Value> output = new MyList<>();
 
         ProgState prg = new ProgState(stk, symTable, output, selectedProgram);
-        IRepository repo = new Repository();
-        repo.add(prg);
+        IRepository repo = new Repository(prg);
         Service ctrl = new Service(repo);
 
         try {

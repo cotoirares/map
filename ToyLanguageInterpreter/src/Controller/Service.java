@@ -31,11 +31,11 @@ public class Service {
 
     public void allStep(){
         ProgState currentProgram = repository.getCurrentProgram();
-        System.out.println(currentProgram);
+        repository.logProgState(currentProgram);
 
         while (!currentProgram.getExecStack().isEmpty()){
             oneStep(currentProgram);
-            System.out.println(currentProgram);
+            repository.logProgState(currentProgram);
         }
     }
 }
