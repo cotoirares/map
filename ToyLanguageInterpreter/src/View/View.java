@@ -61,7 +61,7 @@ public class View {
         return ex3;
     }
 
-    public static IStatement example4(){
+    /*public static IStatement example4(){
         // int a; bool b; a = b; expected: type error
         IStatement ex4 = new CompStatement(
                 new VarDeclStatement("a", new IntType()),
@@ -69,7 +69,7 @@ public class View {
         );
         return ex4;
     }
-
+    */
     public static IStatement example5(){
         // string varf; varf = "test.in"; openRFile(varf); int varc; readFile(varf, varc); Print(varc); readFile(varf, varc); Print(varc); closeRFile(varf);
         IStatement ex5 = new CompStatement(
@@ -120,8 +120,7 @@ public class View {
         menu.addCommand(new RunExample("1", example1(), createService(example1(), "log1.txt")));
         menu.addCommand(new RunExample("2", example2(), createService(example2(), "log2.txt")));
         menu.addCommand(new RunExample("3", example3(), createService(example3(), "log3.txt")));
-        menu.addCommand(new RunExample("4", example4(), createService(example4(), "log4.txt")));
-        menu.addCommand(new RunExample("5", example5(), createService(example5(), "log5.txt")));
+        menu.addCommand(new RunExample("4", example5(), createService(example5(), "log4.txt")));
         menu.addCommand(new ExitCommand("0", "Exit"));
 
         try {
