@@ -1,0 +1,30 @@
+ExeStack: [(Int v; (v = 2; print(v)))]
+SymbolTable: {}
+Output: []
+FileTable: {}
+
+ExeStack: [Int v, (v = 2; print(v))]
+SymbolTable: {}
+Output: []
+FileTable: {}
+
+ExeStack: [(v = 2; print(v))]
+SymbolTable: {v=0}
+Output: []
+FileTable: {}
+
+ExeStack: [v = 2, print(v)]
+SymbolTable: {v=0}
+Output: []
+FileTable: {}
+
+ExeStack: [print(v)]
+SymbolTable: {v=2}
+Output: []
+FileTable: {}
+
+ExeStack: []
+SymbolTable: {v=2}
+Output: [2]
+FileTable: {}
+

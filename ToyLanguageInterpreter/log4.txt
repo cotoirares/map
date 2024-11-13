@@ -1,0 +1,15 @@
+ExeStack: [(Int a; a = true)]
+SymbolTable: {}
+Output: []
+FileTable: {}
+
+ExeStack: [Int a, a = true]
+SymbolTable: {}
+Output: []
+FileTable: {}
+
+ExeStack: [a = true]
+SymbolTable: {a=0}
+Output: []
+FileTable: {}
+

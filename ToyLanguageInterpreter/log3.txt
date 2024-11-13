@@ -1,0 +1,55 @@
+ExeStack: [(bool a; (Int v; (a = true; (if (a) then (v = 2) else (v = 2); print(v)))))]
+SymbolTable: {}
+Output: []
+FileTable: {}
+
+ExeStack: [bool a, (Int v; (a = true; (if (a) then (v = 2) else (v = 2); print(v))))]
+SymbolTable: {}
+Output: []
+FileTable: {}
+
+ExeStack: [(Int v; (a = true; (if (a) then (v = 2) else (v = 2); print(v))))]
+SymbolTable: {a=false}
+Output: []
+FileTable: {}
+
+ExeStack: [Int v, (a = true; (if (a) then (v = 2) else (v = 2); print(v)))]
+SymbolTable: {a=false}
+Output: []
+FileTable: {}
+
+ExeStack: [(a = true; (if (a) then (v = 2) else (v = 2); print(v)))]
+SymbolTable: {a=false, v=0}
+Output: []
+FileTable: {}
+
+ExeStack: [a = true, (if (a) then (v = 2) else (v = 2); print(v))]
+SymbolTable: {a=false, v=0}
+Output: []
+FileTable: {}
+
+ExeStack: [(if (a) then (v = 2) else (v = 2); print(v))]
+SymbolTable: {a=true, v=0}
+Output: []
+FileTable: {}
+
+ExeStack: [if (a) then (v = 2) else (v = 2), print(v)]
+SymbolTable: {a=true, v=0}
+Output: []
+FileTable: {}
+
+ExeStack: [v = 2, print(v)]
+SymbolTable: {a=true, v=0}
+Output: []
+FileTable: {}
+
+ExeStack: [print(v)]
+SymbolTable: {a=true, v=2}
+Output: []
+FileTable: {}
+
+ExeStack: []
+SymbolTable: {a=true, v=2}
+Output: [2]
+FileTable: {}
+
