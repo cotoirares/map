@@ -1,6 +1,7 @@
 package View;
 
 import View.Command.Command;
+import View.Command.RunExample;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +20,11 @@ public class TextMenu {
 
     public void printMenu() {
         for (Command c : commands.values()) {
-            String line = String.format("%4s: %s", c.getKey(), c.getDescription());
+            String status = "";
+            if (c instanceof RunExample) {
+                status = ((RunExample) c).hasBeenExecuted() ? " (executed)" : " (not executed)";
+            }
+            String line = String.format("%4s : %s%s", c.getKey(), c.getDescription(), status);
             System.out.println(line);
         }
     }

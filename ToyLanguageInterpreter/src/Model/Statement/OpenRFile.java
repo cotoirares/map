@@ -22,7 +22,7 @@ public class OpenRFile implements IStatement{
     public ProgState execute(ProgState state) throws MyException {
         Value value;
         try{
-            value = exp.evaluate(state.getSymbolTable());
+            value = exp.evaluate(state.getSymbolTable(), state.getHeap());
         }
         catch (ExpressionException | MyException e){
             throw new MyException(e.getMessage());

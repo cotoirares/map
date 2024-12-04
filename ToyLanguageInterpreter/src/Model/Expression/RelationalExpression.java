@@ -7,6 +7,7 @@ import Model.Value.BoolValue;
 import Model.Value.IntValue;
 import Model.Value.Value;
 import Utils.MyIDictionary;
+import Utils.MyIHeap;
 
 public class RelationalExpression implements IExpression{
     private IExpression exp1;
@@ -20,10 +21,11 @@ public class RelationalExpression implements IExpression{
     }
 
     @Override
-    public Value evaluate(MyIDictionary<String, Value> SymbolTable) throws MyException, ExpressionException {
+    public Value evaluate(MyIDictionary<String, Value> symTable, MyIHeap<Integer, Value> heap)
+    throws MyException, ExpressionException {
         Value v1, v2;
-        v1 = exp1.evaluate(SymbolTable);
-        v2 = exp2.evaluate(SymbolTable);
+        v1 = exp1.evaluate(symTable, heap);
+        v2 = exp2.evaluate(symTable, heap);
 
         if (v1.getType().equals(new IntType()) && v2.getType().equals(new IntType())){
             IntValue i1 = (IntValue) v1;

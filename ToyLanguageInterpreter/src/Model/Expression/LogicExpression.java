@@ -7,6 +7,7 @@ import Model.Type.BoolType;
 import Model.Value.BoolValue;
 import Model.Value.Value;
 import Utils.MyIDictionary;
+import Utils.MyIHeap;
 
 public class LogicExpression implements IExpression {
     private IExpression exp1, exp2;
@@ -19,17 +20,18 @@ public class LogicExpression implements IExpression {
     }
 
     @Override
-    public Value evaluate(MyIDictionary<String, Value> SymbolTable) throws MyException{
+    public Value evaluate(MyIDictionary<String, Value> symTable, MyIHeap<Integer, Value> heap)
+    throws MyException, ExpressionException {
         Value v1, v2;
         try{
-            v1 = exp1.evaluate(SymbolTable);
+            v1 = exp1.evaluate(symTable, heap);
         }
         catch (MyException e){
             throw new MyException(e.getMessage());
         }
         if (v1.getType().equals(new BoolType())){
             try {
-                v2 = exp2.evaluate(SymbolTable);
+                v2 = exp2.evaluate(symTable, heap);
             }
             catch (MyException e){
                 throw new MyException(e.getMessage());

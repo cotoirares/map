@@ -1,6 +1,8 @@
 package Utils;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class MyDictionary<K, V> implements MyIDictionary<K, V> {
@@ -33,5 +35,9 @@ public class MyDictionary<K, V> implements MyIDictionary<K, V> {
     @Override
     public String toString() {
         return this.map.toString();
+    }
+    @Override
+    public List<V> getValues() {
+        return new LinkedList<V>(map.values());
     }
 }

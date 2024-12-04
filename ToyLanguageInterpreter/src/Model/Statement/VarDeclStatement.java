@@ -5,7 +5,6 @@ import Exceptions.MyException;
 import Model.ProgState;
 import Model.Type.IntType;
 import Model.Type.Type;
-import Model.Value.IntValue;
 import Model.Value.Value;
 import Utils.MyIDictionary;
 

@@ -28,3 +28,87 @@ SymbolTable: {v=2}
 Output: [2]
 FileTable: {}
 
+ExeStack: [(Int v; (v = 2; print(v)))]
+SymbolTable: {}
+Output: []
+FileTable: {}
+Heap: (Heap is empty!)
+
+
+ExeStack: [Int v, (v = 2; print(v))]
+SymbolTable: {}
+Output: []
+FileTable: {}
+Heap: (Heap is empty!)
+
+
+ExeStack: [(v = 2; print(v))]
+SymbolTable: {v=0}
+Output: []
+FileTable: {}
+Heap: (Heap is empty!)
+
+
+ExeStack: [v = 2, print(v)]
+SymbolTable: {v=0}
+Output: []
+FileTable: {}
+Heap: (Heap is empty!)
+
+
+ExeStack: [print(v)]
+SymbolTable: {v=2}
+Output: []
+FileTable: {}
+Heap: (Heap is empty!)
+
+
+ExeStack: []
+SymbolTable: {v=2}
+Output: [2]
+FileTable: {}
+Heap: (Heap is empty!)
+
+
+ExeStack: [(Int v; (v = 2; print(v)))]
+SymbolTable: {}
+Output: []
+FileTable: {}
+Heap: (Heap is empty!)
+
+
+ExeStack: [Int v, (v = 2; print(v))]
+SymbolTable: {}
+Output: []
+FileTable: {}
+Heap: (Heap is empty!)
+
+
+ExeStack: [(v = 2; print(v))]
+SymbolTable: {v=0}
+Output: []
+FileTable: {}
+Heap: (Heap is empty!)
+
+
+ExeStack: [v = 2, print(v)]
+SymbolTable: {v=0}
+Output: []
+FileTable: {}
+Heap: (Heap is empty!)
+
+
+ExeStack: [print(v)]
+SymbolTable: {v=2}
+Output: []
+FileTable: {}
+Heap: (Heap is empty!)
+
+
+ExeStack: []
+SymbolTable: {v=2}
+Output: [2]
+FileTable: {}
+Heap: (Heap is empty!)
+
+

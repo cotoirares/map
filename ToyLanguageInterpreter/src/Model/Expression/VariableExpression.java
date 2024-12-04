@@ -4,6 +4,7 @@ import Exceptions.ExpressionException;
 import Exceptions.MyException;
 import Model.Value.Value;
 import Utils.MyIDictionary;
+import Utils.MyIHeap;
 
 public class VariableExpression implements IExpression {
     private String variable;
@@ -13,10 +14,11 @@ public class VariableExpression implements IExpression {
     }
 
     @Override
-    public Value evaluate(MyIDictionary<String, Value> SymbolTable) throws MyException {
-        if (SymbolTable.isDefined(this.variable)){
+    public Value evaluate(MyIDictionary<String, Value> symTable, MyIHeap<Integer, Value> heap)
+    throws MyException, ExpressionException {
+        if (symTable.isDefined(this.variable)){
             try{
-                return SymbolTable.lookUp(variable);
+                return symTable.lookUp(variable);
             }
             catch (MyException e){
                 throw new MyException(e.getMessage());

@@ -1,8 +1,10 @@
 package Model.Expression;
 
+import Exceptions.ExpressionException;
 import Exceptions.MyException;
 import Model.Value.Value;
 import Utils.MyIDictionary;
+import Utils.MyIHeap;
 
 public class ValueExpression implements IExpression {
 
@@ -13,7 +15,8 @@ public class ValueExpression implements IExpression {
     }
 
     @Override
-    public Value evaluate(MyIDictionary<String, Value> SymbolTable) throws MyException {
+    public Value evaluate(MyIDictionary<String, Value> symTable, MyIHeap<Integer, Value> heap)
+    throws MyException, ExpressionException {
         return value;
     }
 

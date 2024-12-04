@@ -21,7 +21,7 @@ public class CloseRFile implements IStatement {
     public ProgState execute(ProgState state) throws MyException {
         Value value;
         try{
-            value = expression.evaluate(state.getSymbolTable());
+            value = expression.evaluate(state.getSymbolTable(), state.getHeap());
         }
         catch (ExpressionException | MyException e){
             throw new MyException(e.getMessage());

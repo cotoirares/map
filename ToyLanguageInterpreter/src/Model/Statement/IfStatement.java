@@ -7,7 +7,6 @@ import Model.ProgState;
 import Model.Type.BoolType;
 import Model.Value.BoolValue;
 import Model.Value.Value;
-import Utils.MyIDictionary;
 import Utils.MyIStack;
 
 
@@ -26,7 +25,7 @@ public class IfStatement implements  IStatement{
     public ProgState execute(ProgState state) throws MyException {
         Value val;
         try{
-            val = this.exp.evaluate(state.getSymbolTable());
+            val = this.exp.evaluate(state.getSymbolTable(), state.getHeap());
         }
         catch (MyException e){
             throw new MyException(e.getMessage());
