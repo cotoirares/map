@@ -43,7 +43,7 @@ public class IfStatement implements  IStatement{
         else{
             throw new StatementException("The condition in the if statement is not a boolean");
         }
-        return state;
+        return null;
     }
 
 

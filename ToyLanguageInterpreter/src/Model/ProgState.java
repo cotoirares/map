@@ -1,5 +1,7 @@
 package Model;
 
+import Exceptions.MyException;
+import Exceptions.StackException;
 import Model.Value.StringValue;
 import Utils.MyIDictionary;
 import Utils.MyIList;
@@ -21,6 +23,18 @@ public class ProgState {
     private MyIDictionary <StringValue, BufferedReader> fileTable;
     private MyIHeap<Integer, Value> heap;
 
+    private static int nextId = 0;
+    private final int id;
+    private boolean isNotCompleted;
+
+    public boolean isNotCompleted() {
+        return isNotCompleted;
+    }
+
+    public void setNotCompleted(boolean isNotCompleted) {
+        this.isNotCompleted = isNotCompleted;
+    }
+
     public MyIDictionary<String, Value> getSymbolTable() {
         return symbolTable;
     }
@@ -41,13 +55,19 @@ public class ProgState {
         return heap;
     }
 
+    private static synchronized int getNextId() {
+        return nextId++;
+    }
+
     public ProgState(MyIStack<IStatement> execStack, MyIDictionary<String, Value> symbolTable, MyIList<Value> output, IStatement program, MyIDictionary<StringValue, BufferedReader> fileTable, MyIHeap<Integer, Value> heap) {
+        this.id = getNextId();
         this.execStack = execStack;
         this.symbolTable = symbolTable;
         this.output = output;
         this.originalProgram = program.deepCopy();
         this.fileTable = fileTable;
         this.heap = heap;
+        this.isNotCompleted = true;
         this.execStack.push(program);
     }
 
@@ -65,12 +85,27 @@ public class ProgState {
         }   
     
         for (Value value : this.heap.getValues()) {
-          if (value instanceof RefValue) {
-            usedAddresses.add(((RefValue) value).getAddress());
-          }
+            if (value instanceof RefValue) {
+                usedAddresses.add(((RefValue) value).getAddress());
+            }
         }
-    
         return usedAddresses;
       }
+    public ProgState oneStep() throws MyException {
+        if (execStack.isEmpty()) {
+            this.isNotCompleted = false;
+            return null;
+        }
+        IStatement createStatement;
+        try {
+            createStatement = execStack.pop();
+        } catch (StackException e) {
+            throw new MyException("ProgState stack is empty");
+        }
+        return createStatement.execute(this);
+    }
 
+    public int getId() {
+        return id;
+    }
 }

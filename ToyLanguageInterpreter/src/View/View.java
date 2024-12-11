@@ -213,6 +213,32 @@ public class View {
                                                                         new IntValue(1)))))),
                                 new PrintStatement(new VariableExpression("v")))));
     }
+    private static IStatement example10() {
+        // int v; Ref int a; v=10; new(a,22); fork(wH(a,30);v=32;print(v);print(rH(a))); print(v);print(rH(a))
+        return new CompStatement(
+                new VarDeclStatement("v", new IntType()),
+                new CompStatement(
+                        new VarDeclStatement("a", new RefType(new IntType())),
+                        new CompStatement(
+                                new AssignStatement("v", new ValueExpression(new IntValue(10))),
+                                new CompStatement(
+                                        new NewStatement("a", new ValueExpression(new IntValue(22))),
+                                        new CompStatement(
+                                                new ForkStatement(
+                                                        new CompStatement(
+                                                                new WriteHeapStatement("a",
+                                                                        new ValueExpression(new IntValue(30))),
+                                                                new CompStatement(
+                                                                        new AssignStatement("v",
+                                                                                new ValueExpression(new IntValue(32))),
+                                                                        new CompStatement(
+                                                                                new PrintStatement(new VariableExpression("v")),
+                                                                                new PrintStatement(new RefExpression(
+                                                                                        new VariableExpression("a"))))))),
+                                                new CompStatement(
+                                                        new PrintStatement(new VariableExpression("v")),
+                                                        new PrintStatement(new RefExpression(new VariableExpression("a")))))))));
+    }
 
     private static ProgState createState (IStatement program){
         MyIStack<IStatement> stack = new MyStack<>();
@@ -241,6 +267,7 @@ public class View {
         menu.addCommand(new RunExample("7", example7(), createService(example7(), "log7.txt")));
         menu.addCommand(new RunExample("8", example8(), createService(example8(), "log8.txt")));
         menu.addCommand(new RunExample("9", example9(), createService(example9(), "log9.txt")));
+        menu.addCommand(new RunExample("10", example10(), createService(example10(), "log10.txt")));
         menu.addCommand(new ExitCommand("0", "Exit"));
 
         try {

@@ -95,6 +95,6 @@ public class ReadFile implements IStatement {
         catch (IOException e){
             throw new MyException(e.getMessage());
         }
-        return state;
+        return null;
     }
 }

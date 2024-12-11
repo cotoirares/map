@@ -40,7 +40,7 @@ public class OpenRFile implements IStatement{
         } catch (FileNotFoundException e) {
             throw new MyException(e.getMessage());
         }
-        return state;
+        return null;
     }
 
     @Override

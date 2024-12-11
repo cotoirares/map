@@ -40,4 +40,11 @@ public class MyDictionary<K, V> implements MyIDictionary<K, V> {
     public List<V> getValues() {
         return new LinkedList<V>(map.values());
     }
+
+    @Override
+    public MyIDictionary<K, V> deepCopy() {
+        MyDictionary<K, V> copy = new MyDictionary<>();
+        copy.map = new HashMap<>(map);
+        return copy;
+    }
 }

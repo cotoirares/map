@@ -47,7 +47,7 @@ public class CloseRFile implements IStatement {
             throw new MyException(e.getMessage());
         }
         state.getFileTable().put(file, null);
-        return state;
+        return null;
     }
 
     @Override

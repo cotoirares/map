@@ -14,7 +14,7 @@ public class PrintStatement implements IStatement {
     @Override
     public ProgState execute(ProgState state) throws MyException {
         state.getOutput().add(expression.evaluate(state.getSymbolTable(), state.getHeap()));
-        return state;
+        return null;
     }
 
     @Override

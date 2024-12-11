@@ -8,4 +8,5 @@ public interface MyIDictionary<K, V> {
     V lookUp(K key);
     boolean isDefined(K key);
     List<V> getValues();
+    MyIDictionary<K, V> deepCopy();
 }

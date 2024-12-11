@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Repository implements IRepository {
-
     private List<ProgState> repository;
     private String filePath;
 
@@ -35,11 +34,6 @@ public class Repository implements IRepository {
     }
 
     @Override
-    public ProgState getCurrentProgram() {
-        return this.repository.get(0);
-    }
-
-    @Override
     public void add(ProgState s) {
         this.repository.add(s);
     }
@@ -56,5 +50,14 @@ public class Repository implements IRepository {
         }
         logFile.println(state.toString());
         logFile.close();
+    }
+    @Override
+    public List<ProgState> getProgList() {
+        return repository;
+    }
+
+    @Override
+    public void setProgList(List<ProgState> progList) {
+        this.repository = progList;
     }
 }

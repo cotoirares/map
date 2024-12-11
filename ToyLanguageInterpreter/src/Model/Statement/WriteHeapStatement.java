@@ -52,7 +52,7 @@ public class WriteHeapStatement implements IStatement{
     }
 
     prg.getHeap().put(address, value);
-    return prg;
+    return null;
   }
 
   @Override

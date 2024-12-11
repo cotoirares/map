@@ -23,7 +23,7 @@ public class VarDeclStatement implements IStatement {
         if (symbolTable.isDefined(id))
             throw new InterpreterException("Variable " + id + " is already defined!");
         symbolTable.put(id, type.defaultValue());
-        return state;
+        return null;
     }
 
     @Override

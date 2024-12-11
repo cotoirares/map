@@ -19,7 +19,7 @@ public class CompStatement implements Model.Statement.IStatement {
         execStack.push(second);
         execStack.push(first);
 
-        return state;
+        return null;
     }
 
     @Override
