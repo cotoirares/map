@@ -3,6 +3,8 @@ package Model.Expression;
 import Exceptions.ExpressionException;
 import Exceptions.HeapException;
 import Exceptions.MyException;
+import Model.Type.RefType;
+import Model.Type.Type;
 import Model.Value.Value;
 import Model.Value.RefValue;
 import Utils.MyIDictionary;
@@ -44,5 +46,15 @@ public class RefExpression implements IExpression {
     public String toString() {
       return "RefExp(" + expression + ")";
     }
-    
+
+    @Override
+    public Type typecheck(MyIDictionary<String, Type> typeEnv) throws ExpressionException {
+        Type type = expression.typecheck(typeEnv);
+        if (type instanceof RefType) {
+            RefType refType = (RefType) type;
+            return refType.getInner();
+        } else {
+            throw new ExpressionException("RefExp: expression is not a RefType");
+        }
+    }
 }

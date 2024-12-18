@@ -1,8 +1,6 @@
 package Model.Statement;
 
-import Exceptions.InterpreterException;
-import Exceptions.MyException;
-import Exceptions.StatementException;
+import Exceptions.*;
 import Model.ProgState;
 import Model.Type.Type;
 import Model.Value.Value;
@@ -41,5 +39,25 @@ public class AssignStatement implements IStatement {
 
     public String toString() {
         return this.id + " = " + this.expression.toString();
+    }
+
+    @Override
+    public MyIDictionary<String, Type> typecheck(MyIDictionary<String, Type> typeEnv) throws MyException {
+        try {
+            Type typevar = typeEnv.lookUp(id);
+            Type typexp;
+            try {
+                typexp = expression.typecheck(typeEnv);
+            } catch (ExpressionException e) {
+                throw new MyException(e.getMessage());
+            }
+            if (typevar.equals(typexp)) {
+                return typeEnv;
+            } else {
+                throw new MyException("Assignment: right and left hand side have different types");
+            }
+        } catch (DictException e) {
+            throw new MyException("Variable " + id + " is not defined in type environment");
+        }
     }
 }

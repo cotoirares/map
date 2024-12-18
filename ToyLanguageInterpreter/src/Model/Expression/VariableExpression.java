@@ -1,7 +1,9 @@
 package Model.Expression;
 
+import Exceptions.DictException;
 import Exceptions.ExpressionException;
 import Exceptions.MyException;
+import Model.Type.Type;
 import Model.Value.Value;
 import Utils.MyIDictionary;
 import Utils.MyIHeap;
@@ -34,5 +36,18 @@ public class VariableExpression implements IExpression {
 
     public String toString() {
         return variable;
+    }
+
+    @Override
+    public Type typecheck(MyIDictionary<String, Type> typeEnv) throws ExpressionException {
+        if (typeEnv.isDefined(this.variable)) {
+            try {
+                return typeEnv.lookUp(this.variable);
+            } catch (DictException e) {
+                throw new ExpressionException("Variable " + this.variable + " is not defined in type environment");
+            }
+        } else {
+            throw new ExpressionException("Variable " + this.variable + " is not defined in type environment");
+        }
     }
 }

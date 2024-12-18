@@ -34,4 +34,10 @@ public class VarDeclStatement implements IStatement {
     public String toString() {
         return this.type.toString() + " " + this.id;
     }
+
+    @Override
+    public MyIDictionary<String, Type> typecheck(MyIDictionary<String, Type> typeEnv) throws MyException {
+        typeEnv.put(id, type);
+        return typeEnv;
+    }
 }

@@ -3,7 +3,10 @@ package Controller;
 import Exceptions.MyException;
 import Exceptions.StackException;
 import Model.ProgState;
+import Model.Type.Type;
 import Model.Value.Value;
+import Utils.MyDictionary;
+import Utils.MyIDictionary;
 import Utils.MyIHeap;
 import Utils.MyIStack;
 import Model.Statement.IStatement;
@@ -21,10 +24,12 @@ import java.util.stream.Collectors;
 public class Service {
     private IRepository repository;
     private ExecutorService executor;
+    private boolean typeChecked;
 
     public Service(IRepository repo) {
         this.repository = repo;
         this.executor = Executors.newFixedThreadPool(2);
+        this.typeChecked = false;
     }
 
     public List<ProgState> removeCompletedPrg(List<ProgState> inProgList) {
@@ -79,19 +84,27 @@ public class Service {
         repository.setProgList(progList);
     }
 
+    private void typecheck() throws MyException {
+        ProgState prg = repository.getProgList().get(0);
+        MyIDictionary<String, Type> typeEnv = new MyDictionary<>();
+        prg.getOriginalProgram().typecheck(typeEnv);
+        typeChecked = true;
+    }
+
     public void allStep(){
+        if (!typeChecked) {
+            typecheck();
+        }
+
         executor = Executors.newFixedThreadPool(2);
         List<ProgState> progList = removeCompletedPrg(repository.getProgList());
 
-        while (progList.size() > 0) {
+        while (!progList.isEmpty()) {
             MyIHeap<Integer, Value> heap = progList.get(0).getHeap();
-
             Set<Integer> usedAddresses = progList.stream()
                     .flatMap(p -> p.getUsedAddresses().stream())
                     .collect(Collectors.toSet());
-
             heap.setHeap(heap.safeGarbageCollector(usedAddresses, heap.getHeap()));
-
             try {
                 oneStepForAllProg(progList);
             } catch (InterruptedException e) {

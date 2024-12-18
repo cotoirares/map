@@ -1,12 +1,15 @@
 package Model.Statement;
 
+import Exceptions.ExpressionException;
 import Exceptions.MyException;
 import Exceptions.StatementException;
 import Model.Expression.IExpression;
 import Model.ProgState;
 import Model.Type.BoolType;
+import Model.Type.Type;
 import Model.Value.BoolValue;
 import Model.Value.Value;
+import Utils.MyIDictionary;
 import Utils.MyIStack;
 
 
@@ -54,5 +57,21 @@ public class IfStatement implements  IStatement{
 
     public String toString() {
         return "if (" + exp.toString() + ") then (" + thenS.toString() + ") else (" + elseS.toString() + ")";
+    }
+
+    @Override
+    public MyIDictionary<String, Type> typecheck(MyIDictionary<String, Type> typeEnv) throws MyException {
+        try {
+            Type typexp = exp.typecheck(typeEnv);
+            if (typexp.equals(new BoolType())) {
+                thenS.typecheck(typeEnv.deepCopy());
+                elseS.typecheck(typeEnv.deepCopy());
+                return typeEnv;
+            } else {
+                throw new MyException("The If condition has not the type bool");
+            }
+        } catch (ExpressionException e) {
+            throw new MyException(e.getMessage());
+        }
     }
 }

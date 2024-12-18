@@ -6,8 +6,10 @@ import Exceptions.MyException;
 import Model.ProgState;
 import Model.Expression.IExpression;
 import Model.Type.RefType;
+import Model.Type.Type;
 import Model.Value.Value;
 import Model.Value.RefValue;
+import Utils.MyIDictionary;
 
 public class WriteHeapStatement implements IStatement{
     private String varName;
@@ -63,5 +65,27 @@ public class WriteHeapStatement implements IStatement{
   @Override
   public String toString() {
     return "WriteHeapStmt(" + varName + ", " + expression + ")";
-  } 
+  }
+
+  @Override
+  public MyIDictionary<String, Type> typecheck(MyIDictionary<String, Type> typeEnv) throws MyException {
+    try {
+      Type typevar = typeEnv.lookUp(varName);
+      Type typexp = expression.typecheck(typeEnv);
+      if (typevar instanceof RefType) {
+        RefType reft = (RefType) typevar;
+        if (typexp.equals(reft.getInner())) {
+          return typeEnv;
+        } else {
+          throw new MyException("WriteHeapStmt: right and left hand side have different types");
+        }
+      } else {
+        throw new MyException("WriteHeapStmt: " + varName + " is not of RefType");
+      }
+    } catch (DictException e) {
+      throw new MyException("Variable " + varName + " is not defined in type environment");
+    } catch (ExpressionException e) {
+      throw new MyException(e.getMessage());
+    }
+  }
 }

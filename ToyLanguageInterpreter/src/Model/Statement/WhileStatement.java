@@ -5,8 +5,10 @@ import Exceptions.MyException;
 import Model.ProgState;
 import Model.Expression.IExpression;
 import Model.Type.BoolType;
+import Model.Type.Type;
 import Model.Value.BoolValue;
 import Model.Value.Value;
+import Utils.MyIDictionary;
 
 public class WhileStatement implements IStatement{
     private IExpression expression;
@@ -44,5 +46,20 @@ public class WhileStatement implements IStatement{
   @Override
   public String toString() {
     return "WhileStatement(" + expression + ", " + statement + ")";
+  }
+
+  @Override
+  public MyIDictionary<String, Type> typecheck(MyIDictionary<String, Type> typeEnv) throws MyException {
+    try {
+      Type typexp = expression.typecheck(typeEnv);
+      if (typexp.equals(new BoolType())) {
+        statement.typecheck(typeEnv.deepCopy());
+        return typeEnv;
+      } else {
+        throw new MyException("The While condition has not the type bool");
+      }
+    } catch (ExpressionException e) {
+      throw new MyException(e.getMessage());
+    }
   }
 }

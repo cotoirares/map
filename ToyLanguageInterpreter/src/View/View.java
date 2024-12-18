@@ -8,10 +8,7 @@ import Model.Expression.RelationalExpression;
 import Model.Expression.VariableExpression;
 import Model.ProgState;
 import Model.Statement.*;
-import Model.Type.BoolType;
-import Model.Type.IntType;
-import Model.Type.RefType;
-import Model.Type.StringType;
+import Model.Type.*;
 import Model.Value.BoolValue;
 import Model.Value.IntValue;
 import Model.Value.StringValue;
@@ -192,7 +189,7 @@ public class View {
 
     private static IStatement example9() {
         // int v; v=4; (while (v>0) print(v);v=v-1);print(v)
-        return new CompStatement(
+        IStatement ex9 = new CompStatement(
                 new VarDeclStatement("v", new IntType()),
                 new CompStatement(
                         new AssignStatement("v", new ValueExpression(new IntValue(4))),
@@ -212,10 +209,11 @@ public class View {
                                                                 new ValueExpression(
                                                                         new IntValue(1)))))),
                                 new PrintStatement(new VariableExpression("v")))));
+        return ex9;
     }
     private static IStatement example10() {
         // int v; Ref int a; v=10; new(a,22); fork(wH(a,30);v=32;print(v);print(rH(a))); print(v);print(rH(a))
-        return new CompStatement(
+        IStatement ex10 = new CompStatement(
                 new VarDeclStatement("v", new IntType()),
                 new CompStatement(
                         new VarDeclStatement("a", new RefType(new IntType())),
@@ -231,16 +229,55 @@ public class View {
                                                                 new CompStatement(
                                                                         new AssignStatement("v",
                                                                                 new ValueExpression(new IntValue(32))),
-                                                                        new CompStatement(
-                                                                                new PrintStatement(new VariableExpression("v")),
-                                                                                new PrintStatement(new RefExpression(
-                                                                                        new VariableExpression("a"))))))),
+                                                                                new PrintStatement(new VariableExpression("v"))))),
                                                 new CompStatement(
                                                         new PrintStatement(new VariableExpression("v")),
                                                         new PrintStatement(new RefExpression(new VariableExpression("a")))))))));
+        return ex10;
+    }
+
+    private static IStatement example11(){
+        // Ref (int) a; int v; new(a, 10); fork(v=20;fork(wH(a, 40); print(rH(a));); print(v);); v = 30; print(v); print(rH(a));
+        IStatement ex11 = new CompStatement(
+                new VarDeclStatement("a", new RefType(new IntType())),
+                new CompStatement(
+                        new VarDeclStatement("v", new IntType()),
+                        new CompStatement(
+                                new NewStatement("a", new ValueExpression(new IntValue(10))),
+                                new CompStatement(
+                                        new ForkStatement(
+                                                new CompStatement(
+                                                        new AssignStatement("v", new ValueExpression(new IntValue(20))),
+                                                        new CompStatement(
+                                                                new ForkStatement(
+                                                                        new CompStatement(
+                                                                                new WriteHeapStatement("a", new ValueExpression(new IntValue(40))),
+                                                                                new CompStatement(
+                                                                                        new PrintStatement(new RefExpression(new VariableExpression("a"))),
+                                                                                        new PrintStatement(new VariableExpression("v"))
+                                                                                )
+                                                                        )
+                                                                ),
+                                                                new PrintStatement(new VariableExpression("v"))
+                                                        )
+                                                )),
+                                                new CompStatement(
+                                                        new AssignStatement("v", new ValueExpression(new IntValue(30))),
+                                                        new CompStatement(
+                                                                new PrintStatement(new VariableExpression("v")),
+                                                                new PrintStatement(new RefExpression(new VariableExpression("a")))
+                                                        )
+                                                )
+                                        )
+                                )
+                        )
+                );
+        return ex11;
     }
 
     private static ProgState createState (IStatement program){
+        MyIDictionary<String, Type> typeEnv = new MyDictionary<>();
+        program.typecheck(typeEnv);
         MyIStack<IStatement> stack = new MyStack<>();
         MyIDictionary<String, Value> symTable = new MyDictionary<>();
         MyIList<Value> output = new MyList<>();
@@ -268,6 +305,7 @@ public class View {
         menu.addCommand(new RunExample("8", example8(), createService(example8(), "log8.txt")));
         menu.addCommand(new RunExample("9", example9(), createService(example9(), "log9.txt")));
         menu.addCommand(new RunExample("10", example10(), createService(example10(), "log10.txt")));
+        menu.addCommand(new RunExample("11", example11(), createService(example11(), "log11.txt")));
         menu.addCommand(new ExitCommand("0", "Exit"));
 
         try {

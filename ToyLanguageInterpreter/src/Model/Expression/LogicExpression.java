@@ -4,6 +4,7 @@ import Exceptions.ExpressionException;
 import Exceptions.InterpreterException;
 import Exceptions.MyException;
 import Model.Type.BoolType;
+import Model.Type.Type;
 import Model.Value.BoolValue;
 import Model.Value.Value;
 import Utils.MyIDictionary;
@@ -59,5 +60,17 @@ public class LogicExpression implements IExpression {
     @Override
     public String toString(){
         return exp1.toString() + " " + operation + " " + exp2.toString();
+    }
+
+    @Override
+    public Type typecheck(MyIDictionary<String, Type> typeEnv) throws ExpressionException {
+        Type type1, type2;
+        type1 = exp1.typecheck(typeEnv);
+        type2 = exp2.typecheck(typeEnv);
+        if (type1.equals(new BoolType()) && type2.equals(new BoolType())) {
+            return new BoolType();
+        } else {
+            throw new ExpressionException("Logical exp: operands are not booleans");
+        }
     }
 }

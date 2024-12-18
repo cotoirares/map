@@ -9,6 +9,7 @@ import Model.Type.Type;
 import Model.Type.RefType;
 import Model.Value.Value;
 import Model.Value.RefValue;
+import Utils.MyIDictionary;
 
 public class NewStatement implements IStatement{
     private String varName;
@@ -58,5 +59,26 @@ public class NewStatement implements IStatement{
   @Override
   public String toString() {
     return "NewStatement(" + varName + ", " + expression + ")";
+  }
+
+  @Override
+  public MyIDictionary<String, Type> typecheck(MyIDictionary<String, Type> typeEnv) throws MyException {
+    Type typevar;
+    try {
+      typevar = typeEnv.lookUp(varName);
+    } catch (DictException e) {
+      throw new MyException("Variable " + varName + " is not defined in type environment");
+    }
+    Type typexp;
+    try {
+      typexp = expression.typecheck(typeEnv);
+    } catch (ExpressionException e) {
+      throw new MyException(e.getMessage());
+    }
+    if (typevar.equals(new RefType(typexp))) {
+      return typeEnv;
+    } else {
+      throw new MyException("NewStatement: right and left hand side have different types");
+    }
   }
 }

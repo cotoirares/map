@@ -47,6 +47,10 @@ public class ProgState {
         return output;
     }
 
+    public IStatement getOriginalProgram() {
+        return originalProgram;
+    }
+
     public MyIDictionary<StringValue, BufferedReader> getFileTable() {
         return fileTable;
     }
@@ -73,7 +77,7 @@ public class ProgState {
 
     @Override
     public String toString() {
-        return "ExeStack: " + this.execStack.getReversed() + "\nSymbolTable: " + this.symbolTable.toString() + "\nOutput: " + this.output.toString() + "\n" + "FileTable: " + this.fileTable.toString() + "\n" + "Heap: " + this.heap.toString() + "\n";
+        return "ID: " + this.id + "\nExeStack: " + this.execStack.getReversed() + "\nSymbolTable: " + this.symbolTable.toString() + "\nOutput: " + this.output.toString() + "\n" + "FileTable: " + this.fileTable.toString() + "\n" + "Heap: " + this.heap.toString() + "\n";
     }
 
     public Set<Integer> getUsedAddresses() {

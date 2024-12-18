@@ -2,7 +2,9 @@ package Model.Expression;
 
 import Exceptions.ExpressionException;
 import Exceptions.MyException;
+import Model.Type.BoolType;
 import Model.Type.IntType;
+import Model.Type.Type;
 import Model.Value.BoolValue;
 import Model.Value.IntValue;
 import Model.Value.Value;
@@ -46,5 +48,21 @@ public class RelationalExpression implements IExpression{
     @Override
     public IExpression deepCopy(){
         return new RelationalExpression(operation, exp1.deepCopy(), exp2.deepCopy());
+    }
+
+    public String toString(){
+        return exp1.toString() + operation + exp2.toString();
+    }
+
+    @Override
+    public Type typecheck(MyIDictionary<String, Type> typeEnv) throws ExpressionException {
+        Type type1, type2;
+        type1 = exp1.typecheck(typeEnv);
+        type2 = exp2.typecheck(typeEnv);
+        if (type1.equals(new IntType()) && type2.equals(new IntType())) {
+            return new BoolType();
+        } else {
+            throw new ExpressionException("RelExp: operands are not integers");
+        }
     }
 }

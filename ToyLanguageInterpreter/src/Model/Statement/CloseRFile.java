@@ -5,8 +5,10 @@ import Exceptions.MyException;
 import Model.Expression.IExpression;
 import Model.ProgState;
 import Model.Type.StringType;
+import Model.Type.Type;
 import Model.Value.StringValue;
 import Model.Value.Value;
+import Utils.MyIDictionary;
 
 import java.io.BufferedReader;
 
@@ -58,5 +60,19 @@ public class CloseRFile implements IStatement {
     @Override
     public IStatement deepCopy() {
         return new CloseRFile(expression.deepCopy());
+    }
+
+    @Override
+    public MyIDictionary<String, Type> typecheck(MyIDictionary<String, Type> typeEnv) throws MyException {
+        Type typexp;
+        try {
+            typexp = expression.typecheck(typeEnv);
+        } catch (ExpressionException e) {
+            throw new MyException(e.getMessage());
+        }
+        if (!typexp.equals(new StringType())) {
+            throw new MyException("Expression is not a string");
+        }
+        return typeEnv;
     }
 }

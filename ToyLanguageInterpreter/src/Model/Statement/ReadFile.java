@@ -1,14 +1,17 @@
 package Model.Statement;
 
 import Exceptions.DictException;
+import Exceptions.ExpressionException;
 import Exceptions.MyException;
 import Model.Expression.IExpression;
 import Model.ProgState;
 import Model.Type.IntType;
 import Model.Type.StringType;
+import Model.Type.Type;
 import Model.Value.IntValue;
 import Model.Value.StringValue;
 import Model.Value.Value;
+import Utils.MyIDictionary;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -96,5 +99,19 @@ public class ReadFile implements IStatement {
             throw new MyException(e.getMessage());
         }
         return null;
+    }
+
+    @Override
+    public MyIDictionary<String, Type> typecheck(MyIDictionary<String, Type> typeEnv) throws MyException {
+        Type typexp;
+        try {
+            typexp = exp.typecheck(typeEnv);
+        } catch (ExpressionException e) {
+            throw new MyException(e.getMessage());
+        }
+        if (!typexp.equals(new StringType())) {
+            throw new MyException("Expression is not a string");
+        }
+        return typeEnv;
     }
 }

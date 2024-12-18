@@ -5,6 +5,7 @@ import Exceptions.ExpressionException;
 import Exceptions.InterpreterException;
 import Exceptions.MyException;
 import Model.Type.IntType;
+import Model.Type.Type;
 import Model.Value.IntValue;
 import Model.Value.Value;
 import Utils.MyIDictionary;
@@ -55,5 +56,21 @@ public class ArithmeticExpression implements IExpression {
 
     public String toString(){
         return exp1.toString() + " " + operation + " " + exp2.toString();
+    }
+
+    @Override
+    public Type typecheck(MyIDictionary<String, Type> typeEnv) throws ExpressionException {
+        Type type1, type2;
+        type1 = exp1.typecheck(typeEnv);
+        type2 = exp2.typecheck(typeEnv);
+        if (type1.equals(new IntType())) {
+            if (type2.equals(new IntType())) {
+                return new IntType();
+            } else {
+                throw new ExpressionException("Arithmetic exp: second operand is not an integer");
+            }
+        } else {
+            throw new ExpressionException("Arithmetic exp: first operand is not an integer");
+        }
     }
 }
