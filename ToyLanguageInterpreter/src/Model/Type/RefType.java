@@ -15,11 +15,12 @@ public class RefType implements Type {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof RefType) {
-            return inner.equals(((RefType) obj).getInner());
+    public boolean equals(Object other) {
+        if (!(other instanceof RefType)) {
+            return false;
         }
-        return false;
+        RefType otherRef = (RefType) other;
+        return inner.equals(otherRef.getInner());
     }
 
     @Override

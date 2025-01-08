@@ -63,22 +63,18 @@ public class NewStatement implements IStatement{
 
   @Override
   public MyIDictionary<String, Type> typecheck(MyIDictionary<String, Type> typeEnv) throws MyException {
-    Type typevar;
     try {
-      typevar = typeEnv.lookUp(varName);
+      Type typevar = typeEnv.lookUp(varName);
+      Type typexp = expression.typecheck(typeEnv);
+      if (typevar.equals(new RefType(typexp))) {
+        return typeEnv;
+      } else {
+        throw new MyException("NEW stmt: right hand side and left hand side have different types");
+      }
     } catch (DictException e) {
       throw new MyException("Variable " + varName + " is not defined in type environment");
-    }
-    Type typexp;
-    try {
-      typexp = expression.typecheck(typeEnv);
     } catch (ExpressionException e) {
       throw new MyException(e.getMessage());
-    }
-    if (typevar.equals(new RefType(typexp))) {
-      return typeEnv;
-    } else {
-      throw new MyException("NewStatement: right and left hand side have different types");
     }
   }
 }

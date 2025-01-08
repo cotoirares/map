@@ -7,11 +7,8 @@ public class IntType implements Type {
     String type = "Int";
 
     @Override
-    public boolean equals(Object another){
-        if (another instanceof IntType)
-            return true;
-        else
-            return false;
+    public boolean equals(Object obj) {
+        return obj instanceof IntType;
     }
 
     @Override

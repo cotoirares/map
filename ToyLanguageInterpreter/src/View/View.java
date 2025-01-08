@@ -53,7 +53,7 @@ public class View {
                                 new AssignStatement("a", new ValueExpression(new BoolValue(true))),
                                 new CompStatement(
                                         new IfStatement(new VariableExpression("a"), new AssignStatement("v", new ValueExpression(new IntValue(2))),
-                                                new AssignStatement("v", new ValueExpression(new IntValue(2)))),
+                                                new AssignStatement("v", new ValueExpression(new IntValue(3)))),
                                         new PrintStatement(new VariableExpression("v")))
                                 )
                         )

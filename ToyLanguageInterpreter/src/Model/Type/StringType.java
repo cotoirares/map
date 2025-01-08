@@ -7,11 +7,8 @@ public class StringType implements Type {
     private String type = "String";
 
     @Override
-    public boolean equals(Object another){
-        if (another instanceof StringType)
-            return true;
-        else
-            return false;
+    public boolean equals(Object other) {
+        return other instanceof StringType;
     }
 
     @Override

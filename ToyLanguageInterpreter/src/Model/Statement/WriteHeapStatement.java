@@ -72,7 +72,7 @@ public class WriteHeapStatement implements IStatement{
     try {
       Type typevar = typeEnv.lookUp(varName);
       Type typexp = expression.typecheck(typeEnv);
-      if (typevar instanceof RefType) {
+      if (typexp.equals(new RefType(typexp).getInner())) {
         RefType reft = (RefType) typevar;
         if (typexp.equals(reft.getInner())) {
           return typeEnv;

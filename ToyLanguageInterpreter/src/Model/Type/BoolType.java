@@ -7,11 +7,8 @@ public class BoolType implements Type{
     private String type = "bool";
 
     @Override
-    public boolean equals(Object another){
-        if (another instanceof BoolType)
-            return true;
-        else
-            return false;
+    public boolean equals(Object obj) {
+        return obj instanceof BoolType;
     }
 
     @Override

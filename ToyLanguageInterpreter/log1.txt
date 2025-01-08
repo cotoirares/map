@@ -208,3 +208,99 @@ FileTable: {}
 Heap: (Heap is empty!)
 
 
+ID: 0
+ExeStack: [(Int v; (v = 2; print(v)))]
+SymbolTable: {}
+Output: []
+FileTable: {}
+Heap: (Heap is empty!)
+
+
+ID: 0
+ExeStack: [Int v, (v = 2; print(v))]
+SymbolTable: {}
+Output: []
+FileTable: {}
+Heap: (Heap is empty!)
+
+
+ID: 0
+ExeStack: [Int v, (v = 2; print(v))]
+SymbolTable: {}
+Output: []
+FileTable: {}
+Heap: (Heap is empty!)
+
+
+ID: 0
+ExeStack: [(v = 2; print(v))]
+SymbolTable: {v=0}
+Output: []
+FileTable: {}
+Heap: (Heap is empty!)
+
+
+ID: 0
+ExeStack: [(v = 2; print(v))]
+SymbolTable: {v=0}
+Output: []
+FileTable: {}
+Heap: (Heap is empty!)
+
+
+ID: 0
+ExeStack: [v = 2, print(v)]
+SymbolTable: {v=0}
+Output: []
+FileTable: {}
+Heap: (Heap is empty!)
+
+
+ID: 0
+ExeStack: [v = 2, print(v)]
+SymbolTable: {v=0}
+Output: []
+FileTable: {}
+Heap: (Heap is empty!)
+
+
+ID: 0
+ExeStack: [print(v)]
+SymbolTable: {v=2}
+Output: []
+FileTable: {}
+Heap: (Heap is empty!)
+
+
+ID: 0
+ExeStack: [print(v)]
+SymbolTable: {v=2}
+Output: []
+FileTable: {}
+Heap: (Heap is empty!)
+
+
+ID: 0
+ExeStack: []
+SymbolTable: {v=2}
+Output: [2]
+FileTable: {}
+Heap: (Heap is empty!)
+
+
+ID: 0
+ExeStack: []
+SymbolTable: {v=2}
+Output: [2]
+FileTable: {}
+Heap: (Heap is empty!)
+
+
+ID: 0
+ExeStack: []
+SymbolTable: {v=2}
+Output: [2]
+FileTable: {}
+Heap: (Heap is empty!)
+
+
