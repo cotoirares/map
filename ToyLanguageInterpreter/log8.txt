@@ -178,3 +178,19 @@ Heap: 1 -> 20
 3 -> 30
 
 
+ID: 0
+ExeStack: [(Ref(Int) v; (NewStatement(v, 20); (Ref(Ref(Int)) a; (NewStatement(a, v); (NewStatement(v, 30); print(RefExp(RefExp(a))))))))]
+SymbolTable: {}
+Output: []
+FileTable: {}
+Heap: (Heap is empty!)
+
+
+ID: 0
+ExeStack: [Ref(Int) v, (NewStatement(v, 20); (Ref(Ref(Int)) a; (NewStatement(a, v); (NewStatement(v, 30); print(RefExp(RefExp(a)))))))]
+SymbolTable: {}
+Output: []
+FileTable: {}
+Heap: (Heap is empty!)
+
+

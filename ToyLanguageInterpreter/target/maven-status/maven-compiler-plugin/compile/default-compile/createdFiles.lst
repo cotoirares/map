@@ -19,6 +19,7 @@ Model/Statement/WriteHeapStatement.class
 View/View.class
 Model/Statement/AssignStatement.class
 Model/Type/BoolType.class
+View/gui/MainWindowController.class
 Model/Statement/NewStatement.class
 Utils/MyIList.class
 Utils/MyIStack.class
@@ -44,6 +45,7 @@ Model/Statement/ReadFile.class
 Utils/MyDictionary.class
 View/Command/RunExample.class
 Model/Type/StringType.class
+View/gui/ProgramListController.class
 Exceptions/HeapException.class
 Model/Value/Value.class
 Model/Statement/PrintStatement.class

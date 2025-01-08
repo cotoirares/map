@@ -47,4 +47,7 @@ public class MyDictionary<K, V> implements MyIDictionary<K, V> {
         copy.map = new HashMap<>(map);
         return copy;
     }
+    public Map<K, V> getDict() {
+        return map;
+    }
 }

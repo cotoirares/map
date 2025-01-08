@@ -5,6 +5,7 @@ import Exceptions.StackException;
 import Model.ProgState;
 import Model.Type.Type;
 import Model.Value.Value;
+import Repository.Repository;
 import Utils.MyDictionary;
 import Utils.MyIDictionary;
 import Utils.MyIHeap;
@@ -32,13 +33,17 @@ public class Service {
         this.typeChecked = false;
     }
 
+    public IRepository getRepository(){
+        return repository;
+    }
+
     public List<ProgState> removeCompletedPrg(List<ProgState> inProgList) {
         return inProgList.stream()
                 .filter(p -> p.isNotCompleted())
                 .collect(Collectors.toList());
     }
 
-    void oneStepForAllProg(List<ProgState> progList) throws InterruptedException {
+    public void oneStepForAllProg(List<ProgState> progList) throws InterruptedException {
         progList.forEach(prog -> {
             try {
                 repository.logProgState(prog);
