@@ -28,7 +28,7 @@ public class VarDeclStatement implements IStatement {
 
     @Override
     public IStatement deepCopy() {
-        return new VarDeclStatement(id, new IntType());
+        return new VarDeclStatement(id, type.deepCopy());
     }
 
     public String toString() {
